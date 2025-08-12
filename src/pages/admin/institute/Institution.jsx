@@ -82,7 +82,10 @@ function Institution() {
 
   const handleModalOpen = () => setOpenModal(true);
   const handleModalClose = () => {
-    setOpenModal(false); setFormData({}); setFormErrs({});
+    setOpenModal(false); 
+    setId('');
+    setFormData({});
+     setFormErrs({});
   };
 
   const [loading, setLoading] = useState(false);
@@ -297,14 +300,14 @@ function Institution() {
         <Grid container sx={styles.container}>
           <Grid size={{ xs: 6, sm: 6, md: 6 }}>
             <CustomTypography
-              text="List of institution"
+              text="List of Institution"
               fontWeight={500}
               fontSize={{ xs: "18px", md: "22px", sm: "20px" }}
             />
           </Grid>
           <Grid>
             <CustomButton
-              children="Add institute"
+              children="Add Institute"
               onClick={handleModalOpen}
               loading={false}
               bgColor="#EAB308"
