@@ -36,7 +36,7 @@ function SuperAdminStudentProfile() {
     "Sr No",
     "Name",
     "Email",
-    "Status",
+    // "Status",
     "Subscription",
   ];
 
@@ -46,15 +46,15 @@ function SuperAdminStudentProfile() {
        student.username,
        student.email, 
 
-       <CustomButton
-         children={student.isactive ? "Active" : "Inactive"}
+      //  <CustomButton
+      //    children={student.isactive ? "Active" : "Inactive"}
        
-          bgColor={student.isactive ? "#109CF1" : "#F44336"}
-          sx={{
-            width: { xs: "50px", sm: "60px", md: "70px" },
-            fontSize: { xs: "10px", sm: "11px", md: "12px" },
-          }}
-        />,
+      //     bgColor={student.isactive ? "#109CF1" : "#F44336"}
+      //     sx={{
+      //       width: { xs: "50px", sm: "60px", md: "70px" },
+      //       fontSize: { xs: "10px", sm: "11px", md: "12px" },
+      //     }}
+      //   />,
 
        <CustomButton
          children={student.is_subscribed ? "Subscribed" : "Not Subscribed"}

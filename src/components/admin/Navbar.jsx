@@ -4,6 +4,7 @@ import CustomButton from './CustomButton';
 import CustomTypography from './CustomTypography';
 import { getAdminRoutePrefix } from '../../utils/RoutePrefix';
 import { useAuth } from '../../context/AuthContext';
+import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 
 const Navbar = ({ title, children }) => {
   const { logout, adminId, instituteId, instituteToken, adminToken } = useAuth();
@@ -406,7 +407,7 @@ const Navbar = ({ title, children }) => {
                   }}
                 >
                   <ListItemIcon sx={{ minWidth: 30, mr: 1 }}>
-                    <img src="/images/3-User.svg" alt="img" />
+                    <AddBusinessIcon sx={{ color:'#8F95B2'}} />
                   </ListItemIcon>
                   <CustomTypography text='Advertise' color={isActive(`${routePrefix}/advertise`) ? 'white' : '#8F95B2'} fontSize={{ xs: '14px', sm: '16px', md: '16px' }} mb={0} fontWeight={500} />
                 </ListItem>

@@ -137,14 +137,13 @@ function Institution() {
     if (!formData.permanentAddress)
       errs.permanentAddress = "Permanent address is required";
 
-    if (!formData.transactionId)
-      errs.transactionId = "Transaction ID is required";
+    // if (!formData.transactionId)
+    //   errs.transactionId = "Transaction ID is required";
 
     setFormErrs(errs);
     return errs;
   };
-
-
+s
 
   const resetFormData = () => {
   setFormData({
@@ -169,28 +168,30 @@ function Institution() {
     }
 
     try {
-      setLoading(true);
+      // setLoading(true);
       // console.log("Adding institute with data:", formData);
       const response = await apiPost("/admin/addInstitute", formData);
       // console.log("Response data:", response.data);
 
       console.log("Response status:", response);
-      fetchInstitute();
+    
 
-      if (response.status === 200) {
+      if (response.data.status === 200) {
         snackbarEmitter(response.data.message, "success");
         handleModalClose();
         resetFormData();
+          
       } else {
         snackbarEmitter("Failed to add institute", "error");
       }
+      fetchInstitute();
 
-      setTimeout(() => {setLoading(false);}, 2000);
+     
     } catch (error) {
       // console.error("Error adding institute:", error);
       snackbarEmitter("Something went wrong", "error");
 
-      setTimeout(() => { setLoading(false);}, 2000);
+      // setTimeout(() => { setLoading(false);}, 2000);
     }
   };
 

@@ -281,9 +281,13 @@ function AdminLogin() {
   const [forgotLoading, setForgotLoading] = useState(false);
 
   const handleForgotClick = () => {
+
+    
+    
     setForgotDialogOpen(true);
   }
   const handleForgotPassword = async () => {
+    console.log('active form', activeForm);
     if (!forgotEmail) {
       setForgotError('Email is required');
       return;
@@ -298,7 +302,7 @@ function AdminLogin() {
     const endpoint = activeForm === 'login' ? '/admin/forgot-password' : '/institute/forgotPassword';
 
     try {
-      const response = await apiPost('/admin/forgot-password', { email: forgotEmail });
+      const response = await apiPost(endpoint, { email: forgotEmail });
 
 
       setTimeout(() => {
