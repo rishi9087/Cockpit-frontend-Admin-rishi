@@ -36,7 +36,6 @@ function SuperAdminStudentProfile() {
     "Sr No",
     "Name",
     "Email",
-    // "Status",
     "Subscription",
   ];
 
@@ -56,13 +55,13 @@ function SuperAdminStudentProfile() {
       //     }}
       //   />,
 
-       <CustomButton
-         children={student.is_subscribed ? "Subscribed" : "Not Subscribed"}
-         loading={false}
-         bgColor={student.is_subscribed ? "#109CF1" : "#F44336"}
+       <CustomTypography
+         text={student.is_subscribed ? "Subscribed" : "Not Subscribed"}
          sx={{
-           width: "auto",
-           fontSize: { xs: "10px", sm: "11px", md: "12px" },
+          //  width: "auto",
+           fontSize: { xs: "11px", sm: "12px", md: "14px" },
+           color: student.is_subscribed ? "#109CF1" : "#F44336",
+           fontWeight: 500,
          }}
        />,
      ],
@@ -95,6 +94,7 @@ function SuperAdminStudentProfile() {
             maxWidth={"100%"}
             tableHeaders={tableHeaders}
             tableData={tableData}
+           showPointer = {false}
             
           />
         </Grid>

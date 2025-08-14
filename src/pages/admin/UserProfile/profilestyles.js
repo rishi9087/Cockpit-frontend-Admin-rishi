@@ -10,10 +10,10 @@
       gap: 3,
     },
     profileImageBox: {
-      width: 100,
-      height: 100,
+      width: 80,
+      height: 80,
       border: "1px solid #ccc",
-      borderRadius: 2,
+      borderRadius: 20,
       backgroundColor: "#F5F5F5",
       cursor: "pointer",
       overflow: "hidden",
@@ -23,6 +23,20 @@
       alignItems: "center",
       mb:1
     },
+     labelBox: {
+    width: 80,
+    height: 80,
+    border: "1px solid #ccc",
+    borderRadius: 40,
+    backgroundColor: "#F5F5F5",
+    cursor: "pointer",
+    overflow: "hidden",
+    position: "relative",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 8, // Equivalent to MUI `mb: 1`
+  },
     profileImageLabel: {
       width: "100%",
       height: "100%",

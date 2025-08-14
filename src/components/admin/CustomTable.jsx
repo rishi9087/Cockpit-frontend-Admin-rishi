@@ -1,5 +1,11 @@
 
 
+
+
+function CustomTable({ maxWidth = "100%", tableData = [], tableHeaders = [], handleRowClick, showPointer = true }) {
+
+
+
 const styles = {
   container: {
     boxShadow: "none",
@@ -17,7 +23,7 @@ const styles = {
     },
   },
   headCell: {
-    textAlign: "center",
+    textAlign: "left",
     verticalAlign: "middle",
     borderBottom: "1px solid #ccc",
     fontFamily: "Jost",
@@ -32,11 +38,10 @@ const styles = {
     backgroundColor: "#fff",
   },
   row: {
-    cursor: "pointer",
+     cursor: showPointer ? 'pointer' : 'default',
   },
   bodyCell: {
-    textAlign: "center",
-    verticalAlign: "middle",
+    textAlign: "left",
     fontFamily: "Jost",
     fontStyle: "normal",
     fontSize: {
@@ -49,8 +54,6 @@ const styles = {
   },
 };
 
-
-function CustomTable({ maxWidth = "100%", tableData = [], tableHeaders = [], handleRowClick }) {
   return (
     <Grid container>
       <TableContainer component={Paper} elevation={0} sx={{ ...styles.container, maxWidth }}>

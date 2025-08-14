@@ -1,5 +1,5 @@
 
-import { apiPost } from '../../../api/axios';
+import { apiPostNoToken } from '../../../api/axios';
 import CustomTextField from '../../../components/admin/CustomTextField';
 import { snackbarEmitter } from '../../../components/admin/CustomSnackbar';
 import CustomButton from '../../../components/admin/CustomButton';
@@ -7,6 +7,7 @@ import './adminLogin.css';
 import CustomTypography from '../../../components/admin/CustomTypography';
 import { useGoogleLogin } from '@react-oauth/google';
 import { useAuth } from '../../../context/AuthContext';
+import axios from 'axios';
 
 const styles = {
   containerBox: {
@@ -182,7 +183,7 @@ function AdminLogin() {
 
     const req = { email: loginForm.email, password: loginForm.password };
     try {
-      const response = await apiPost('/admin/loginAdmin', req);
+      const response = await apiPostNoToken('/admin/loginAdmin', req);
       console.log("Response :", response.data);
 
       setTimeout(() => {
@@ -216,7 +217,7 @@ function AdminLogin() {
 
     const req = { email: insloginForm.email, password: insloginForm.password };
     try {
-      const response = await apiPost('/institute/loginInstitute', req);
+      const response = await apiPostNoToken('/institute/loginInstitute', req);
       console.log("Response :", response.data);
 
       setTimeout(() => {
@@ -250,7 +251,7 @@ function AdminLogin() {
     setLoading(true);
 
     try {
-      const response = await apiPost('/admin/registerAdmin', req);
+      const response = await apiPostNoToken('/admin/registerAdmin', req);
 
       setTimeout(() => {
         setLoading(false);
@@ -302,7 +303,7 @@ function AdminLogin() {
     const endpoint = activeForm === 'login' ? '/admin/forgot-password' : '/institute/forgotPassword';
 
     try {
-      const response = await apiPost(endpoint, { email: forgotEmail });
+      const response = await apiPostNoToken(endpoint, { email: forgotEmail });
 
 
       setTimeout(() => {
@@ -344,7 +345,7 @@ function AdminLogin() {
         console.log('userEmail', userEmail);
 
         const endpoint = activeForm === 'instituteLogin' ? '/institute/AuthLoginInstitute' : '/AuthLoginAdmin';
-        const userResponse = await apiPost(endpoint, { email: userEmail });
+        const userResponse = await apiPostNoToken(endpoint, { email: userEmail });
         console.log('userResponse', userResponse);
 
         if (userResponse.data.status === 200) {

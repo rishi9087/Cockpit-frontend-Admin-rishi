@@ -63,30 +63,30 @@ const Navbar = ({ title, children }) => {
     }
   };
 
- 
 
-  const[instituteData, setInstituteData] = useState({});
 
-    const getInstituteProfile = async () => {
-      try {
-        const response = await apiGet('/getInstitute');
+  const [instituteData, setInstituteData] = useState({});
 
-        if (response.data.status === 200) {
-          setInstituteData(response.data.data);
-        }
-        else {
-          snackbarEmitter(response.data.message, 'error');
-        }
-      } catch (error) {
-        snackbarEmitter("Error fetching profile", "error");
+  const getInstituteProfile = async () => {
+    try {
+      const response = await apiGet('/getInstitute');
+
+      if (response.data.status === 200) {
+        setInstituteData(response.data.data);
       }
-    };
+      else {
+        snackbarEmitter(response.data.message, 'error');
+      }
+    } catch (error) {
+      snackbarEmitter("Error fetching profile", "error");
+    }
+  };
 
-     useEffect(() => {
-      instituteId ? getInstituteProfile() :  getProfile();
-  
+  useEffect(() => {
+    instituteId ? getInstituteProfile() : getProfile();
+
   }, []);
-    
+
 
   const [open, setOpen] = useState(false);
   // const navigate = useNavigate();
@@ -174,12 +174,32 @@ const Navbar = ({ title, children }) => {
           </Box>
 
           {/* Logo */}
-          <Box sx={{ textAlign: 'center', mb: 3, cursor: 'pointer' }} onClick={() => handleNavigate('/dashboard')}>
-            <img
-              src={instituteId ? instituteData?.institeDetails?.logo : '/images/full logo.svg'}
-              alt="Add Logo"
-              style={{ width: '100px', height: 'auto', marginBottom: '10px' }}
-            />
+          <Box sx={{ textAlign: 'center', mb: 3, cursor: 'pointer' }} >
+            {
+              !instituteId && <img
+                src={'/images/full logo.svg'}
+                alt="Add Logo"
+                style={{ width: '100px', height: 'auto', marginBottom: '10px' }}
+                onClick={() => handleNavigate('/dashboard')}
+              />
+
+            }
+
+            {instituteId && (
+              instituteData?.institeDetails?.logo? <img
+                src={instituteData?.institeDetails?.logo}
+                alt="Logo"
+                style={{ width: '100px', height: 'auto', marginBottom: '10px' }}
+                onClick={() => handleNavigate('/profile')}
+              /> :
+                <Box sx={{ display: 'flex', gap: 0.5, alignItems: 'center', justifyContent: 'center' }} onClick={() => handleNavigate('/profile')}>
+                  <Avatar sx={{ bgcolor: '#EAB308', width: 25, height: 25 }}></Avatar>
+                  <Typography sx={{ fontSize: { xs: '12px', sm: '14px', md: '16px' } }}>Add logo</Typography>
+                </Box>
+            )
+
+
+            }
           </Box>
 
           <Box sx={{ flexGrow: 4 }}>
@@ -407,7 +427,7 @@ const Navbar = ({ title, children }) => {
                   }}
                 >
                   <ListItemIcon sx={{ minWidth: 30, mr: 1 }}>
-                    <AddBusinessIcon sx={{ color:'#8F95B2'}} />
+                    <AddBusinessIcon sx={{ color: '#8F95B2' }} />
                   </ListItemIcon>
                   <CustomTypography text='Advertise' color={isActive(`${routePrefix}/advertise`) ? 'white' : '#8F95B2'} fontSize={{ xs: '14px', sm: '16px', md: '16px' }} mb={0} fontWeight={500} />
                 </ListItem>
@@ -511,7 +531,7 @@ const Navbar = ({ title, children }) => {
               <Avatar sx={{ width: 25, height: 25, }}
                 src={instituteId ? instituteData?.institeDetails?.profileimage : adminData?.profileimage}
               >
-                {instituteId? instituteData?.institeDetails?.instituteName :  adminData?.firstname?.charAt(0).toUpperCase()}
+                {instituteId ? instituteData?.institeDetails?.instituteName : adminData?.firstname?.charAt(0).toUpperCase()}
 
               </Avatar>
             </Box>
@@ -690,7 +710,7 @@ const Navbar = ({ title, children }) => {
                 {/* <Typography variant="body1">
                   {adminData?.username}
                 </Typography> */}
-                <CustomTypography text={instituteId? instituteData?.institeDetails?.instituteName : adminData?.firstname} fontSize={{ xs: '12px', md: '14px', sm: '14px' }} mb={0} fontWeight={600} />
+                <CustomTypography text={instituteId ? instituteData?.institeDetails?.instituteName : adminData?.firstname} fontSize={{ xs: '12px', md: '14px', sm: '14px' }} mb={0} fontWeight={600} />
                 {/* <Typography variant="caption" color="text.secondary">
                   {adminData?.role === "super_admin" ? "Super Admin" : "Admin"}
                   

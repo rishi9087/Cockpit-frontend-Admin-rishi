@@ -6,6 +6,8 @@ import CustomTypography from "../../../components/admin/CustomTypography";
 import { snackbarEmitter } from "../../../components/admin/CustomSnackbar";
 import Navbar from "../../../components/admin/Navbar";
 import { getAdminRoutePrefix } from "../../../utils/RoutePrefix";
+import { alignItems, fontSize, fontWeight, justifyContent, textAlign, textTransform } from "@mui/system";
+import { max } from "date-fns";
 
 
 
@@ -90,7 +92,7 @@ function Advertise() {
     "Sr no",
     "Created Date",
     "Link",
-    "Time Limit",
+    "Time Limit(Hrs)",
     "Status",
     "Action",
   ];
@@ -110,7 +112,7 @@ function Advertise() {
 
   const table = ads.map((ad, index) => ({
     row: [
-     
+
       new Date(ad.createdAt).toLocaleDateString(),
       ad.link,
       ad.timeLimit,
@@ -142,10 +144,13 @@ function Advertise() {
     fileInputRef.current.click();
   };
 
+  const [selectedFile, setSelectedFile] = useState(null);
+
   const handleFileChange = (event) => {
     const file = event.target.files[0];
     if (file) {
       setFormData((prev) => ({ ...prev, image: file }));
+      setSelectedFile(file);
     }
   };
 
@@ -188,7 +193,7 @@ function Advertise() {
     if (!validate()) return;
 
     const payload = new FormData();
-    payload.append("advertisementId",id)
+    payload.append("advertisementId", id)
     payload.append("link", formData.link);
     payload.append("timeLimit", formData.timeLimit);
     if (formData.image instanceof File) {
@@ -209,11 +214,11 @@ function Advertise() {
 
   return (
     <>
-      <Navbar title="Institution">
+      <Navbar title="Advertisement">
         <Grid container sx={styles.container}>
           <Grid size={{ xs: 6, sm: 6, md: 6 }}>
             <CustomTypography
-              text="Advertisement"
+              text="Advertisements"
               fontWeight={500}
               fontSize={{ xs: "18px", md: "22px", sm: "20px" }}
             />
@@ -271,50 +276,72 @@ function Advertise() {
                   placeholder="Enter"
                   error={!!formErrs.timeLimit}
                   helperText={formErrs.timeLimit}
+                  type="number"
                 />
               </Grid>
 
-              <Grid size={{ xs: 12, md: 7 }}>
-                <CustomTextField
-                  label="Image*"
-                  name="image"
-                  value={
-                    formData.image instanceof File
-                      ? formData.image.name
-                      : formData.image || ""
-                  }
-                  placeholder="Click to upload image"
-                  onClick={handleFileClick}
-                  readOnly
-                  error={!!formErrs.image}
-                  helperText={formErrs.image}
-                  sx={{ cursor: "pointer", borderRadius: "10px" }}
-                />
-              </Grid>
+              {/* <Grid size={{ xs: 12, md:5 }}>
+                <Button
+                  component="label"
+                  // variant="contained"
+                  
+                  sx={{ borderRadius: '8px', p: 1.5, mt: 1, border: '1px solid #D0D0D0',  }}
 
-              <Grid size={{ xs: 12, md: 3 }}>
-                <CustomButton
-                  children="Upload"
-                  bgColor="#EAB308"
-                  onClick={handleFileClick}
+                >
+                  <input
+                    type="file"
+                    // hidden
+                    accept="image/*"
+                    onChange={handleFileChange}
+                  />
+                </Button>
+              </Grid> */}
+              <Grid item size={{ xs: 12, md: 10 }} sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                {/* Left: File Upload Button */}
+                <Button
+                  component="label"
                   sx={{
-                    width: "100%",
-                    height: "56px",
-                    fontWeight: "bold",
-                    fontSize: "14px",
-                    borderRadius: "10px",
-                    mt: 3,
+                    borderRadius: "8px",
+                    p: 1.5,
+                    mt: 1,
+                    border: "1px solid #D0D0D0",
+                    width: "fit-content",
+                    fontSize: { xs: "10px", md: "11px", sm: "11px" },
+                    textTransform:'none',
+                    fontWeight:'bold'
                   }}
-                />
+                >
+                 Click to Choose File
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={handleFileChange}
+                    hidden
+                  />
+                </Button>
+
+                {/* Right: Image Preview */}
+                {formData.image && (
+                  <Box
+                    component="img"
+                    src={
+                      formData.image instanceof File
+                        ? URL.createObjectURL(formData.image)
+                        : formData.image
+                    }
+                    alt="Selected"
+                    sx={{
+                      width: 60,
+                      height: 60,
+                      borderRadius: 2,
+                      objectFit: "cover",
+                      border: "1px solid #ccc",
+                      mt: 1,
+                    }}
+                  />
+                )}
               </Grid>
 
-              <input
-                type="file"
-                accept="image/*"
-                ref={fileInputRef}
-                onChange={handleFileChange}
-                style={{ display: "none" }}
-              />
             </Grid>
 
             <Grid

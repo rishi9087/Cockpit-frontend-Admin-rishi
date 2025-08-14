@@ -143,7 +143,6 @@ function Institution() {
     setFormErrs(errs);
     return errs;
   };
-s
 
   const resetFormData = () => {
   setFormData({
@@ -168,15 +167,15 @@ s
     }
 
     try {
-      // setLoading(true);
+      setLoading(true);
       // console.log("Adding institute with data:", formData);
       const response = await apiPost("/admin/addInstitute", formData);
       // console.log("Response data:", response.data);
 
       console.log("Response status:", response);
     
-
-      if (response.data.status === 200) {
+      setTimeout(() => {
+         if (response.data.status === 200) {
         snackbarEmitter(response.data.message, "success");
         handleModalClose();
         resetFormData();
@@ -184,6 +183,10 @@ s
       } else {
         snackbarEmitter("Failed to add institute", "error");
       }
+        setLoading(false);
+      }, 500);
+
+     
       fetchInstitute();
 
      
@@ -272,7 +275,7 @@ s
   const table = institutes.map((institute) => ({
     institute,
     row: [
-      <Box onClick={() => handleClick(institute)} sx={{ cursor: "pointer" }}>
+      <Box onClick={() => handleClick(institute)} sx={{ cursor: "pointer", }}>
         {institute.instituteName}
       </Box>,
       <Box onClick={() => handleClick(institute)} sx={{ cursor: "pointer" }}>

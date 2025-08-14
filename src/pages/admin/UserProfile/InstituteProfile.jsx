@@ -94,7 +94,7 @@ const InstituteProfile = () => {
       setLoading(false);
       if (response.data.status === 200) {
         snackbarEmitter(response.data.message, "success");
-         
+
       } else {
         snackbarEmitter(response.data.message, "error");
       }
@@ -139,25 +139,39 @@ const InstituteProfile = () => {
         <Grid container spacing={2} component="form" onSubmit={handleSubmit}>
           <Grid size={{ xs: 12, md: 12, sm: 12 }} sx={styles.profileImageContainer}>
             <Box>
-              <Box sx={styles.profileImageBox}>
+               <label style={styles.labelBox}>
+              {profileImage ? (
+                  <img src={profileImage instanceof File ? URL.createObjectURL(profileImage) : profileImage} alt="Profile" style={styles.profileImage} />
+                ) : (
+                  <CameraAltIcon fontSize="large" />
+                )}
 
-                <label htmlFor="profile-upload" style={styles.profileImageLabel}>
-                  {profileImage ? (
-                    <img src={profileImage instanceof File ? URL.createObjectURL(profileImage) : profileImage} alt="Profile" style={styles.profileImage} />
-                  ) : (
-                    <CameraAltIcon fontSize="large" />
-                  )}
-                </label>
-                <input type="file" id="profile-upload" accept="image/*" style={{ display: "none" }} onChange={handleImageChange} />
+               <input type="file" id="profile-upload" accept="image/*" style={{ display: "none" }} onChange={handleImageChange} />
+            </label>
+
+            <CustomTypography text="Upload profile" sx={{fontSize: { xs: '10px', sm: '11px', md: '12px' }}} />
+
+              {/* <Box sx={styles.profileImageBox} >
+
+              <label htmlFor="profile-upload" style={styles.profileImageBox}>
+                {profileImage ? (
+                  <img src={profileImage instanceof File ? URL.createObjectURL(profileImage) : profileImage} alt="Profile" style={styles.profileImage} />
+                ) : (
+                  <CameraAltIcon fontSize="large" />
+                )}
+              </label>
+              <input type="file" id="profile-upload" accept="image/*" style={{ display: "none" }} onChange={handleImageChange} />
 
               </Box>
-              <CustomTypography text="Upload profile" />
+              <CustomTypography text="Upload profile" /> */}
 
             </Box>
 
+           
+
+
             <Box>
-              <Box sx={styles.profileImageBox}>
-                <label htmlFor="logo-upload" style={styles.profileImageLabel}>
+                <label htmlFor="logo-upload" style={styles.labelBox}>
                   {logoImage ? (
                     <img src={logoImage instanceof File ? URL.createObjectURL(logoImage) : logoImage} alt="image" style={styles.profileImage} />
                   ) : (
@@ -167,8 +181,7 @@ const InstituteProfile = () => {
                 </label>
                 <input type="file" id="logo-upload" accept="image/*" style={{ display: "none" }} onChange={handleLogoChange} />
 
-              </Box>
-              <CustomTypography text="Upload logo" />
+              <CustomTypography text="Upload logo" sx={{fontSize: { xs: '10px', sm: '11px', md: '12px' }}} />
 
             </Box>
 

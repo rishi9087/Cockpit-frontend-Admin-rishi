@@ -47,6 +47,20 @@ export const apiPost = async (endpoint, data) => {
   return await axios.post(`${BASE_URL}${endpoint}`, data, { headers });
 };
 
+export const apiPostNoToken = async (endpoint, data) => {
+  const { BASE_URL } = getTokenAndBaseUrl();
+
+  const headers = {
+    'Content-Type': 'application/json',
+  };
+
+  if (!(data instanceof FormData)) {
+    headers['Content-Type'] = 'application/json';
+  }
+
+  return await axios.post(`${BASE_URL}${endpoint}`, data, { headers });
+};
+
 
 export const apiPostUpload = async (endpoint, data) => {
   const { token, BASE_URL } = getTokenAndBaseUrl();
