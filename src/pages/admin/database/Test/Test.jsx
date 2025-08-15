@@ -155,15 +155,15 @@ function Test() {
 
   const navigate = useNavigate();
 
-  const handleNavigate = (id) => {
+  const handleNavigate = (id, testName) => {
     // console.log("Eye Icon Clicked", id);
-      navigate(`${routePrefix}/testQuestions`, { state: { testId : id} });
+      navigate(`${routePrefix}/testQuestions`, { state: { testId : id, testName:testName} });
   };
 
   const tableHeaders = [
     "Sr No",
     "Test Name",
-    "Marks",
+    "Total Marks",
     "Duration (in Minutes)",
     "Action",
   ];
@@ -175,7 +175,7 @@ function Test() {
       <Box>{test.duration}</Box>,
       <Box sx={{display:{xs:"flex",md:"inline"}}}>
         <IconButton
-          onClick={() => handleNavigate(test._id)}
+          onClick={() => handleNavigate(test._id, test.testName)}
           sx={{ color: "#EAB308" }}
         >
           <Visibility />
@@ -318,12 +318,13 @@ function Test() {
                   }
                   error={!!errors.duration}
                   helperText={errors.duration}
+                  type="number"
                 />
               </Grid>
 
               <Grid size={{ xs: 12, md: 5 }}>
                 <CustomTextField
-                  label="Marks*"
+                  label="Total Marks*"
                   name="marks"
                   placeholder="Enter"
                   value={formData.marks}
@@ -332,6 +333,7 @@ function Test() {
                   }
                   error={!!errors.marks}
                   helperText={errors.marks}
+                  type="number"
                 />
               </Grid>
 
@@ -359,7 +361,7 @@ function Test() {
         >
           <DialogTitle>Confirm Deletion</DialogTitle>
           <DialogContent>
-            <Typography>Are you sure you want to delete </Typography>
+            <Typography>Are you sure you want to delete this test?</Typography>
           </DialogContent>
           <DialogActions>
             <Button

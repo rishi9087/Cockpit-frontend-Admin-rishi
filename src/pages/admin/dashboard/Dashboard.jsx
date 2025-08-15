@@ -177,6 +177,7 @@ function Dashboard() {
                 maxWidth={"100%"}
                 tableHeaders={tableHeaders}
                 tableData={tableData}
+                tableName={"Student List"}
               /> : <Graph />}
             </Grid>
 

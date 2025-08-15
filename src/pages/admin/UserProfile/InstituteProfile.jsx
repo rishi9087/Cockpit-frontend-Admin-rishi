@@ -33,7 +33,7 @@ const InstituteProfile = () => {
         instituteName: data.institeDetails.instituteName || "",
         phone: data.institeDetails.phone || "",
         department: data.institeDetails.department || "",
-        address: data.institeDetails.currentAddress || "",
+        address: data.institeDetails.permanentAddress || "",
         subsrciptionAmt: data.subscriptionDetails.subscriptionAmt || "",
         subscriptionPeriod: data.subscriptionDetails.subscriptionPeriod || "",
       };
@@ -188,7 +188,7 @@ const InstituteProfile = () => {
           </Grid>
           {inputFields.map((field, index) => (
             <Grid key={index} size={{ xs: 12, md: 6 }}>
-              <CustomTextField name={field.name} placeholder={field.placeholder} value={field.value} onChange={handleChange} required error={!!errors[field.name]} helperText={errors[field.name]}
+              <CustomTextField label={field.placeholder} name={field.name} placeholder={field.placeholder} value={field.value} onChange={handleChange} required error={!!errors[field.name]} helperText={errors[field.name]}
                 {...(field.disabled && { disabled: true })} />
             </Grid>
           ))}

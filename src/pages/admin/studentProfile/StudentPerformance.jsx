@@ -2,8 +2,7 @@ import Navbar from "../../../components/admin/Navbar";
 import CustomTypography from "../../../components/admin/CustomTypography";
 import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
 import ReactSpeedometer from "react-d3-speedometer";
-import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+
 import { apiGet, apiPost } from "../../../api/axios";
 import { max, min } from "date-fns";
 import { LineChart, Line, XAxis, YAxis, Tooltip as RechartsTooltip, CartesianGrid, ResponsiveContainer } from "recharts";

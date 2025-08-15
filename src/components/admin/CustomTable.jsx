@@ -1,8 +1,9 @@
+import CustomTypography from "./CustomTypography";
 
 
 
 
-function CustomTable({ maxWidth = "100%", tableData = [], tableHeaders = [], handleRowClick, showPointer = true }) {
+function CustomTable({ maxWidth = "100%", tableName, tableData = [], tableHeaders = [], handleRowClick, showPointer = true }) {
 
 
 
@@ -56,7 +57,9 @@ const styles = {
 
   return (
     <Grid container>
+    
       <TableContainer component={Paper} elevation={0} sx={{ ...styles.container, maxWidth }}>
+        <CustomTypography text={tableName} fontSize={{ xs: "16px", sm: "18px", md: "20px" }} fontWeight={600} sx={{ml:2, mt:1}} />
         <Table stickyHeader>
           <TableHead>
             <TableRow>

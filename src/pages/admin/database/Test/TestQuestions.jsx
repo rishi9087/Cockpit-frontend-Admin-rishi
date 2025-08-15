@@ -8,13 +8,14 @@ import CustomTypography from "../../../../components/admin/CustomTypography";
 import Navbar from "../../../../components/admin/Navbar";
 import { set } from "date-fns";
 import { getAdminRoutePrefix } from "../../../../utils/RoutePrefix";
+import ArrowCircleLeftRoundedIcon from "@mui/icons-material/ArrowCircleLeftRounded";
 
 function TestQuestions() {
     const navigate = useNavigate();
     const routePrefix = getAdminRoutePrefix();
 
     const location = useLocation();
-    const {testId} = location.state;
+    const { testId, testName } = location.state;
 
     const [openStatusModal, setOpenStatusModal] = useState(false);
     const handleStatusModalOpen = () => setOpenStatusModal(true);
@@ -51,7 +52,7 @@ function TestQuestions() {
     const tableData = testQuestions.map((testquestions) => ({
         row: [
             <Box>{testquestions.question}</Box>,
-            <CustomButton children={testquestions.isactive === true ? 'Active' : 'Inactive'} onClick={() => handleStatusClick(testquestions)}  bgColor={testquestions.isactive === true ? '#109CF1' : '#D61508'} sx={{ width: { xs: '20%', sm: '20%', md: '20%' }, fontSize: { xs: '10px', sm: '11px', md: '12px' }, }} />,
+            <CustomButton children={testquestions.isactive === true ? 'Active' : 'Inactive'} onClick={() => handleStatusClick(testquestions)} bgColor={testquestions.isactive === true ? '#109CF1' : '#D61508'} sx={{ width: { xs: '20%', sm: '20%', md: '20%' }, fontSize: { xs: '10px', sm: '11px', md: '12px' }, }} />,
             <Box>
                 <IconButton color="primary" onClick={() => handleEditClick(testquestions)}>
                     <EditSquareIcon sx={{ color: '#EAB308', fontSize: { xs: '18px', sm: '20px' } }} />
@@ -69,7 +70,7 @@ function TestQuestions() {
     };
 
     const handleNavigate = (id) => {
-        navigate(`${routePrefix}/addTestQuestion`, { state: { testId : testId} });
+        navigate(`${routePrefix}/addTestQuestion`, { state: { testId: testId } });
     };
 
     const [formData, setFormData] = useState({
@@ -113,7 +114,7 @@ function TestQuestions() {
         }
 
         console.log('before is active', req.isactive);
-        
+
 
         // setLoading(true);
 
@@ -174,6 +175,17 @@ function TestQuestions() {
                             fontWeight={500}
                             fontSize={{ xs: "18px", md: "22px", sm: "20px" }}
                         />
+                        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, cursor: 'pointer' }} >
+                             <ArrowCircleLeftRoundedIcon sx={{ color: "#EAB308", fontSize: "28px", cursor: "pointer" }} onClick={() => window.history.back()} />
+                            <CustomTypography
+                                text={testName}
+                                fontWeight={500}
+                                fontSize={{ xs: "13px", md: "16px", sm: "16px" }}
+                                sx={{ textDecoration: 'underline', mt:0.5 }}
+                            />
+                        </Box>
+
+
                     </Grid>
                     <Grid>
                         <CustomButton
@@ -218,7 +230,7 @@ function TestQuestions() {
                                 <Grid container spacing={2} sx={{ display: 'flex', alignItems: 'center' }}>
                                     <Grid item>
 
-                                        <CustomButton children='Yes' onClick={updateQuestionStatus}  bgColor='#EAB308' sx={{ width: '20%' }} />
+                                        <CustomButton children='Yes' onClick={updateQuestionStatus} bgColor='#EAB308' sx={{ width: '20%' }} />
                                     </Grid>
                                     <Grid item>
                                         <CustomButton children='No' onClick={handleStatusModalClose} bgColor='#BF0000' sx={{ width: '20%' }} />

@@ -78,7 +78,7 @@ function Training({ syllabusNav = false, syllabusName, bookName, chapterName, qu
     if (name === "book") {
       const selected = book.find((b) => b._id === value);
 
-      setFormData((prev) => ({...prev, book: selected?.bookTitle, bookId: selected?._id || "", chapter: "", chapterId: ""}));
+      setFormData((prev) => ({ ...prev, book: selected?.bookTitle, bookId: selected?._id || "", chapter: "", chapterId: "" }));
       setErrors((prev) => ({ ...prev, book: undefined }));
       getChapters(formData.syllabus, value);
       setChapters([]);
@@ -208,8 +208,11 @@ function Training({ syllabusNav = false, syllabusName, bookName, chapterName, qu
   const handleCancel = () => {
     setFormData({
       syllabus: syllabusName || "",
+      syllabusId: syllabusId || "",
       book: bookName || "",
+      bookId: bookId || "",
       chapter: chapterName || "",
+      chapterId: chapterId || "",
       question: question?.question || "",
       options: question?.options || [
         { id: 1, text: "", isCorrect: false },
@@ -323,8 +326,8 @@ function Training({ syllabusNav = false, syllabusName, bookName, chapterName, qu
         : chapters
           .filter(
             item =>
-              item.bookId === formData.bookId 
-              // item.syllabusId?._id === formData.syllabusId
+              item.bookId === formData.bookId
+            // item.syllabusId?._id === formData.syllabusId
           )
           .map(item => ({
             label: item.chaptername,

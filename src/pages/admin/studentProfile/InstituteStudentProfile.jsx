@@ -64,8 +64,7 @@ function AdminStudentProfile() {
 
   const handleSubmit = async () => {
     const errors = handleErrors();
-
-    if (errors.length > 0) {
+    if (Object.keys(errors).length > 0) {
       return;
     }
 
@@ -74,7 +73,7 @@ function AdminStudentProfile() {
       const response = await apiPost(`/addInstituteStudent`, formData);
 
       setTimeout(() => {
-        if (response.status === 200) {
+        if (response.data.status === 200) {
           setLoading(false);
           snackbarEmitter(response.data.message, "success");
           handleModalClose();
@@ -97,7 +96,7 @@ function AdminStudentProfile() {
         ...formData,
       });
        setTimeout(() => {
-        if (response.status === 200) {
+        if (response.data.status === 200) {
           setLoading(false);
           snackbarEmitter(response.data.message, "success");
           handleModalClose();
@@ -285,7 +284,7 @@ function AdminStudentProfile() {
       <Dialog open={openModal} onClose={handleModalClose} fullWidth>
         <DialogTitle sx={styles.dialogTitle}>
           <Typography variant="h6" sx={{ fontWeight: "bold" }}>
-            Add Student
+            {isEditMode ? "Update Student" : "Add Student"}
           </Typography>
           <IconButton onClick={handleModalClose}>
             <CloseIcon />
@@ -365,7 +364,9 @@ function AdminStudentProfile() {
                   error={!!formErrs.password}
                   helperText={formErrs.password}
                   fullWidth
+                  // disabled = {isEditMode}
                 />
+                
                 <Button
                   onClick={handleGeneratePassword}
                   sx={styles.generateButton}
@@ -393,12 +394,12 @@ function AdminStudentProfile() {
             size={{ xs: 12, md: 6 }}
           >
             <CustomButton
-              children={editingStudentId ? "Update" : "Add"}
+              children={isEditMode ? "Update" : "Add"}
               loading={false}
               bgColor="#EAB308"
               sx={{ width: "20%" }}
               onClick={() =>
-                editingStudentId
+                isEditMode
                   ? updateStudent(editingStudentId)
                   : handleSubmit()
               }
