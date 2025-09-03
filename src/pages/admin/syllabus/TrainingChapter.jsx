@@ -159,7 +159,6 @@ function TrainingChapter() {
     }
 
     const [formData, setFormData] = useState({
-        chapterno: '',
         chaptername: '',
         status: ''
     });
@@ -169,7 +168,6 @@ function TrainingChapter() {
     };
 
     const [formErrors, setFormErrors] = useState({
-        chapterno: '',
         chaptername: '',
         status: ''
     });
@@ -184,7 +182,6 @@ function TrainingChapter() {
 
         const errors = {};
 
-        if (!formData.chapterno) errors.chapterno = 'Chapterno is required';
         if (!formData.chaptername) errors.chaptername = 'Chaptername is required';
         // if (!formData.status) errors.status = 'Status is required';
 
@@ -198,7 +195,6 @@ function TrainingChapter() {
             syllabusId: syllabusID,
             book: selectedBook,
             bookId: selectedBookID,
-            chapterno: formData.chapterno,
             chaptername: formData.chaptername,
             status: formData.status
         };
@@ -589,7 +585,7 @@ function TrainingChapter() {
                 <DialogContent dividers>
 
                     <Grid container sx={{ display: 'flex', gap: 3, mb: 3 }}>
-                        <Grid size={{ xs: 10, md: 5, sm: 5 }}>
+                        {/* <Grid size={{ xs: 10, md: 5, sm: 5 }}>
                             <CustomTextField
                                 label="Chapter No"
                                 name="chapterno"
@@ -600,8 +596,8 @@ function TrainingChapter() {
                                 helperText={formErrors.chapterno}
                             />
 
-                        </Grid>
-                        <Grid size={{ xs: 10, md: 5, sm: 5 }}>
+                        </Grid> */}
+                        <Grid size={{ xs: 10, md: 10, sm: 10 }}>
                             <CustomTextField
                                 label="Chapter name"
                                 name="chaptername"
