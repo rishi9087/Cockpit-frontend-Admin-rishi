@@ -191,7 +191,7 @@ function Dashboard() {
                     <Box mt={2}>
                       <CustomTypography text={report?.userId?.username} fontSize={{ xs: '12px', sm: '14px', md: '14px' }} mb={0} fontWeight={600} />
                       <Box sx={classes.reportLine}>
-                        <CustomTypography text={` Has reported a question on ${report?.questionId?.syllabus}`} color='#718096' fontSize={{ xs: '10px', sm: '12px', md: '12px' }} mb={0} fontWeight={400} />
+                        <CustomTypography text={` Has reported a question on ${report.questionsDetails[0]?.syllabusId?.title}`} color='#718096' fontSize={{ xs: '10px', sm: '12px', md: '12px' }} mb={0} fontWeight={400} />
 
                         <CustomTypography text='Reply' onClick={() => handleNavigate(`/feedback`, report?._id)} color='#EAB308' fontSize={{ xs: '10px', sm: '12px', md: '12px' }} mb={0} fontWeight={600} sx={{ cursor: 'pointer' }} />
                       </Box>

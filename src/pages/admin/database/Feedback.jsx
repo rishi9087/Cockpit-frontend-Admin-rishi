@@ -257,7 +257,7 @@ function Feedback() {
                     <CustomTypography
                       fontSize={{ xs: '12px', sm: '13px', md: '14px' }}
                       fontWeight={500}
-                      text={`${report?.userId?.username} has ${report?.reason === '' ? 'reported a' : 'filed answer for a'}  question on ${report.questionsDetails[0]?.syllabusId?.title}`}
+                      text={`${report?.userId?.username} has ${report?.reason === '' ? 'reported a' : 'filed answer for a'}  question on ${report?.questionsDetails[0]?.syllabusId?.title}`}
                       mb={0} />
 
                     <CustomTypography
